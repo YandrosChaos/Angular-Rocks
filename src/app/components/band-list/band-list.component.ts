@@ -6,6 +6,7 @@ import { DetailsComponent } from './details/details.component';
 import { BandService } from '../../services/band.service';
 import { AddComponent } from './add/add.component';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-band-list',
@@ -14,9 +15,9 @@ import Swal from 'sweetalert2';
 })
 export class BandListComponent implements OnInit {
   bandsData: Array<Band> = [];
-  displayedColumns: string[] = ['name', 'year', 'active', 'remove'];
+  displayedColumns: string[] = ['name', 'year', 'active','remove'];
   dataSource = new MatTableDataSource(this.bandsData);
-  constructor(private bandService: BandService, private dialog: MatDialog) {}
+  constructor(private bandService: BandService, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
     this.bandsData = this.bandService.getAllBand();
@@ -29,12 +30,7 @@ export class BandListComponent implements OnInit {
   }
 
   openDetailsDialog(band: Band): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = false;
-    dialogConfig.data = {
-      data: band,
-    };
-    this.dialog.open(DetailsComponent, dialogConfig);
+    this.router.navigate([`/details`, band.name?.replace(/\s/g, "")]);
   }
 
   onAdd(): void {
