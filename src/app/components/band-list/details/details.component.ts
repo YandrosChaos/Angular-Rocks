@@ -1,23 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { Inject } from '@angular/core';
-import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Band } from '../../../models/band';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BandService } from '../../../services/band.service';
 
 @Component({
   selector: 'app-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+  styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit {
-
   detailBand: Band = new Band();
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+    private bandService: BandService,
+    private route: ActivatedRoute
+    ) {}
 
   ngOnInit(): void {
-    this.detailBand = this.data.data;
+    this.route.paramMap.subscribe((params) => {
+      console.log(params.get('band'))
+      this.bandService.getBandByName(params.get('band') || "").subscribe(
+        response => {
+          this.detailBand = response;
+        }
+      )
+    });
   }
-
 }

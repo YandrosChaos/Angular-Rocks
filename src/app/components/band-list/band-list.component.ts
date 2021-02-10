@@ -1,11 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Band } from 'src/app/models/band';
-import { DetailsComponent } from './details/details.component';
 import { BandService } from '../../services/band.service';
 import { AddComponent } from './add/add.component';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-band-list',
@@ -16,11 +20,23 @@ export class BandListComponent implements OnInit {
   bandsData: Array<Band> = [];
   displayedColumns: string[] = ['name', 'year', 'active', 'remove'];
   dataSource = new MatTableDataSource(this.bandsData);
-  constructor(private bandService: BandService, private dialog: MatDialog) {}
+  constructor(
+    private bandService: BandService,
+    private dialog: MatDialog,
+    private router: Router,
+    private cdr: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
-    this.bandsData = this.bandService.getAllBand();
-    this.dataSource = new MatTableDataSource(this.bandsData);
+    this.bandService.getAllBand().subscribe((response) => {
+      console.log(response);
+      this.bandsData = response;
+      this.dataSource = new MatTableDataSource(response);
+    });
+  }
+
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
   }
 
   applyFilter(event: Event) {
@@ -29,26 +45,21 @@ export class BandListComponent implements OnInit {
   }
 
   openDetailsDialog(band: Band): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = false;
-    dialogConfig.data = {
-      data: band,
-    };
-    this.dialog.open(DetailsComponent, dialogConfig);
+    this.router.navigate([`/details`, band.name.replace(/\s/g, '')]);
   }
 
   onAdd(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = false;
-    const dialogRef = this.dialog.open(AddComponent, dialogConfig)
-    dialogRef.afterClosed()
-      .subscribe((data) => {
-        if(data){
-          this.bandsData = this.dataSource.data;
-          this.bandsData.push(data);
-          this.dataSource = new MatTableDataSource(this.bandsData);
-        }
-      });
+    const dialogRef = this.dialog.open(AddComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe((data) => {
+      if (data) {
+        this.bandService.createBand(data);
+        this.bandsData = this.dataSource.data;
+        this.bandsData.push(data);
+        this.dataSource = new MatTableDataSource(this.bandsData);
+      }
+    });
   }
 
   removeAt(row: any): void {
@@ -64,11 +75,10 @@ export class BandListComponent implements OnInit {
       hideClass: {
         popup: 'animate__animated animate__hinge',
       },
-    }).then(result=>{
-      if(result.isConfirmed){
-        this.dataSource.data = this.dataSource.data.filter((i) => i != row);
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.bandService.deleteBand(row);
       }
-    })
-    
+    });
   }
 }
