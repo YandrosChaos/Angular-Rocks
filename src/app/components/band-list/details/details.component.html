@@ -1,28 +1,28 @@
 <div *ngIf="detailBand">
-  <h1 class="mt-4">{{ detailBand.name }}</h1>
+  <h1 class="mt-4">{{ detailBand?.name }}</h1>
   <div class="container mx-auto">
     <div class="d-flex justify-content-between align-items-center m-1">
       <div class="btn-group">
         <a
           target="_blank"
           rel="external nofollow"
-          href="{{ detailBand.videoLink }}"
+          href="{{ detailBand?.videoLink }}"
         >
           <button type="button" class="btn btn-danger">Rock Now!</button>
         </a>
       </div>
-      <small class="text-muted">Formed in: {{ detailBand.formedIn }}</small>
+      <small class="text-muted">Formed in: {{ detailBand?.formedIn }}</small>
     </div>
 
     <img
-      src="{{ detailBand.imgLink }}"
+      src="{{ detailBand?.imgLink }}"
       width="100%"
       height="auto"
       focusable="false"
     />
 
     <p class="mt-5">
-      {{ detailBand.description }}
+      {{ detailBand?.description }}
     </p>
   </div>
 </div>

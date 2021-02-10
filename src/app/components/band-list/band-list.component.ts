@@ -1,9 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import {
-  MatDialog,
-  MatDialogConfig,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Band } from 'src/app/models/band';
 import { BandService } from '../../services/band.service';
@@ -23,20 +19,14 @@ export class BandListComponent implements OnInit {
   constructor(
     private bandService: BandService,
     private dialog: MatDialog,
-    private router: Router,
-    private cdr: ChangeDetectorRef
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.bandService.getAllBand().subscribe((response) => {
-      console.log(response);
       this.bandsData = response;
       this.dataSource = new MatTableDataSource(response);
     });
-  }
-
-  ngAfterViewInit() {
-    this.cdr.detectChanges();
   }
 
   applyFilter(event: Event) {
@@ -53,13 +43,12 @@ export class BandListComponent implements OnInit {
     dialogConfig.autoFocus = false;
     const dialogRef = this.dialog.open(AddComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
-      if (data) {
-        this.bandService.createBand(data);
-        this.bandsData = this.dataSource.data;
-        this.bandsData.push(data);
-        this.dataSource = new MatTableDataSource(this.bandsData);
-      }
+      this.bandService.createBand(data);
     });
+  }
+
+  onReset(): void {
+    this.bandService.createOrAddDefaultData();
   }
 
   removeAt(row: any): void {
