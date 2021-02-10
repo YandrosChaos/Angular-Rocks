@@ -6,6 +6,7 @@ import { BandService } from '../../services/band.service';
 import { AddComponent } from './add/add.component';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { noSpacesBandName, successSwal } from 'src/app/commons/utils';
 
 @Component({
   selector: 'app-band-list',
@@ -35,7 +36,7 @@ export class BandListComponent implements OnInit {
   }
 
   openDetailsDialog(band: Band): void {
-    this.router.navigate([`/details`, band.name.replace(/\s/g, '')]);
+    this.router.navigate([`/details`, noSpacesBandName(band)]);
   }
 
   onAdd(): void {
@@ -44,11 +45,13 @@ export class BandListComponent implements OnInit {
     const dialogRef = this.dialog.open(AddComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
       this.bandService.createBand(data);
+      successSwal();
     });
   }
 
   onReset(): void {
     this.bandService.createOrAddDefaultData();
+    successSwal();
   }
 
   removeAt(row: any): void {

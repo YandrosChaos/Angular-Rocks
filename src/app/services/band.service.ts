@@ -4,6 +4,7 @@ import { BANDS } from '../commons/bands.json';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { renderBandFromCollection, renderBandFromDocument, noSpacesBandName, bandToJson } from '../commons/utils';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,7 @@ export class BandService {
       .pipe(
         map((response) => {
           return response.map((item) => {
-            return this.renderBandFromCollection(item);
+            return renderBandFromCollection(item);
           });
         })
       );
@@ -31,7 +32,7 @@ export class BandService {
       .snapshotChanges()
       .pipe(
         map((response) => {
-          return this.renderBandFromDocument(response);
+          return renderBandFromDocument(response);
         })
       );
   }
@@ -39,33 +40,18 @@ export class BandService {
   createBand(band: Band): void {
     this.firestore
       .collection('bands')
-      .doc(band.name.replace(/\s/g, ''))
-      .set(JSON.parse(JSON.stringify(band)));
+      .doc(noSpacesBandName(band))
+      .set(bandToJson(band));
   }
 
   deleteBand(band: Band): void {
     this.firestore
       .collection<Band>('bands')
-      .doc(band.name.replace(/\s/g, ''))
+      .doc(noSpacesBandName(band))
       .delete();
   }
 
   createOrAddDefaultData():void{
     BANDS.forEach((band) => this.createBand(band));
-  }
-
-  private renderBandFromCollection(item: any): Band {
-    return item.payload.doc.data() as Band;
-  }
-
-  private renderBandFromDocument(item: any): Band {
-    return {
-      name: item.payload.get('name'),
-      description: item.payload.get('description'),
-      formedIn: item.payload.get('formedIn'),
-      active: item.payload.get('active'),
-      videoLink: item.payload.get('videoLink'),
-      imgLink: item.payload.get('imgLink'),
-    } as Band;
   }
 }
