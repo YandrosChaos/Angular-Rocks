@@ -5,6 +5,7 @@ import { Band } from 'src/app/models/band';
 import { DetailsComponent } from './details/details.component';
 import { BandService } from '../../services/band.service';
 import { AddComponent } from './add/add.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-band-list',
@@ -42,13 +43,32 @@ export class BandListComponent implements OnInit {
     const dialogRef = this.dialog.open(AddComponent, dialogConfig)
     dialogRef.afterClosed()
       .subscribe((data) => {
-        this.bandsData = this.dataSource.data;
-        this.bandsData.push(data);
-        this.dataSource = new MatTableDataSource(this.bandsData);
+        if(data){
+          this.bandsData = this.dataSource.data;
+          this.bandsData.push(data);
+          this.dataSource = new MatTableDataSource(this.bandsData);
+        }
       });
   }
 
   removeAt(row: any): void {
-    this.dataSource.data = this.dataSource.data.filter((i) => i != row);
+    Swal.fire({
+      icon: 'warning',
+      text: 'Are you sure?',
+      showCancelButton: true,
+      confirmButtonText: `Yes`,
+      position: 'top-end',
+      showClass: {
+        popup: 'animate__animated animate__rotateInUpRight',
+      },
+      hideClass: {
+        popup: 'animate__animated animate__hinge',
+      },
+    }).then(result=>{
+      if(result.isConfirmed){
+        this.dataSource.data = this.dataSource.data.filter((i) => i != row);
+      }
+    })
+    
   }
 }

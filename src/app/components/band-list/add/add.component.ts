@@ -17,4 +17,8 @@ export class AddComponent implements OnInit {
   onSave() {
     this.dialogRef.close(this.band);
   }
+
+  onClose() {
+    this.dialogRef.close();
+  }
 }

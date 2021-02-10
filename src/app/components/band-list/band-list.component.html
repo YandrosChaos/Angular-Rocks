@@ -1,5 +1,11 @@
-<div class="container m-4">
-  <button type="button" class="btn btn-sm btn-outline-danger m-1" (click)="onAdd()">Add</button>
+<div class="m-4">
+  <button
+    type="button"
+    class="btn btn-sm btn-success m-1"
+    (click)="onAdd()"
+  >
+    Add One
+  </button>
 
   <mat-form-field>
     <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input />
@@ -47,12 +53,12 @@
       <mat-header-cell *matHeaderCellDef> </mat-header-cell>
       <mat-cell *matCellDef="let element">
         <button
-          type="button"
-          class="btn btn-warning m-1"
+          mat-icon-button
+          class="close-button m-1"
+          [mat-dialog-close]="true"
           (click)="removeAt(element)"
-          matTooltip="Remove this row."
         >
-          Delete
+          <mat-icon class="close-icon" color="warn">delete</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
