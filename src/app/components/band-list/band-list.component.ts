@@ -44,8 +44,12 @@ export class BandListComponent implements OnInit {
     dialogConfig.autoFocus = false;
     const dialogRef = this.dialog.open(AddComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
-      this.bandService.createBand(data);
-      successSwal();
+
+      if(data){
+        this.bandService.createBand(data);
+        successSwal();
+      }
+
     });
   }
 
