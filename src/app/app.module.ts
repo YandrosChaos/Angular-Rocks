@@ -12,6 +12,8 @@ import {MatDialogModule} from "@angular/material/dialog"
 import {MatTableModule} from '@angular/material/table'
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { AddComponent } from './components/band-list/add/add.component';
+import { FormsModule }   from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { MatInputModule } from '@angular/material/input';
     HeaderComponent,
     FooterComponent,
     BandListComponent,
-    DetailsComponent
+    DetailsComponent,
+    AddComponent
   ],
   imports: [
     BrowserModule,
@@ -28,10 +31,11 @@ import { MatInputModule } from '@angular/material/input';
     MatDialogModule,
     MatTableModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [DetailsComponent]
+  entryComponents: [DetailsComponent, AddComponent]
 })
 export class AppModule { }

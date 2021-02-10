@@ -1,5 +1,5 @@
 <div class="container m-4">
-  <button type="button" class="btn btn-sm btn-outline-danger m-1">Add</button>
+  <button type="button" class="btn btn-sm btn-outline-danger m-1" (click)="onAdd()">Add</button>
 
   <mat-form-field>
     <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input />
@@ -45,13 +45,14 @@
     <!-- Remove Column -->
     <ng-container matColumnDef="remove">
       <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-      <mat-cell *matCellDef="let element;">
+      <mat-cell *matCellDef="let element">
         <button
-          mat-icon-button
+          type="button"
+          class="btn btn-warning m-1"
           (click)="removeAt(element)"
-          matTooltip="Remove this score"
+          matTooltip="Remove this row."
         >
-          <mat-icon>clear</mat-icon>
+          Delete
         </button>
       </mat-cell>
     </ng-container>

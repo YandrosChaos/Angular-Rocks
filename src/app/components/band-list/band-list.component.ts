@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Band } from 'src/app/models/band';
 import { DetailsComponent } from './details/details.component';
 import { BandService } from '../../services/band.service';
+import { AddComponent } from './add/add.component';
 
 @Component({
   selector: 'app-band-list',
@@ -35,9 +36,19 @@ export class BandListComponent implements OnInit {
     this.dialog.open(DetailsComponent, dialogConfig);
   }
 
-  onAdd(): void {}
+  onAdd(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = false;
+    const dialogRef = this.dialog.open(AddComponent, dialogConfig)
+    dialogRef.afterClosed()
+      .subscribe((data) => {
+        this.bandsData = this.dataSource.data;
+        this.bandsData.push(data);
+        this.dataSource = new MatTableDataSource(this.bandsData);
+      });
+  }
 
   removeAt(row: any): void {
-    this.dataSource.data = this.dataSource.data.filter(i => i != row)
+    this.dataSource.data = this.dataSource.data.filter((i) => i != row);
   }
 }
