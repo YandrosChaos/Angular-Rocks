@@ -34,4 +34,10 @@ export class BandListComponent implements OnInit {
     };
     this.dialog.open(DetailsComponent, dialogConfig);
   }
+
+  onAdd(): void {}
+
+  removeAt(row: any): void {
+    this.dataSource.data = this.dataSource.data.filter(i => i != row)
+  }
 }
