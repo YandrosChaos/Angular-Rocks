@@ -1,1 +1,32 @@
-<p>details works!</p>
+<button
+  mat-icon-button
+  class="close-button float-right"
+  [mat-dialog-close]="true"
+>
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+<div class="mt-5"></div>
+<h1 mat-dialog-title>{{ detailBand.name }}</h1>
+<mat-dialog-content>
+
+    <img src="{{detailBand.imgLink}}" width="100%" height="auto" focusable="false">
+
+  <div>
+      <h3 class="text-center">Releases</h3>
+        <table width="100%">
+            <tr *ngFor="let rel of detailBand.released">
+              <td class="text-center">{{ rel }}</td>
+            </tr>
+          </table>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center">
+    <div class="btn-group">
+      <a target="_blank" rel="external nofollow" href="{{detailBand.videoLink}}">
+        <button type="button" class="btn btn-sm btn-outline-danger mr-1">Play</button>
+      </a>
+    </div>
+    <small class="text-muted">Formed in: {{detailBand.formedIn}}</small>
+  </div>
+
+</mat-dialog-content>

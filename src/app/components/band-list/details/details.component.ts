@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Inject } from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Band } from '../../../models/band';
 
 @Component({
   selector: 'app-details',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsComponent implements OnInit {
 
-  constructor() { }
+  detailBand: Band = new Band();
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) { }
 
   ngOnInit(): void {
+    this.detailBand = this.data.data;
   }
 
 }

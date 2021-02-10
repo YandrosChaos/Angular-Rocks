@@ -5,8 +5,11 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { BandListComponent } from './components/band-list/band-list.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DetailsComponent } from './components/band-list/details/details.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatIconModule } from "@angular/material/icon";
+import {MatDialogModule} from "@angular/material/dialog"
+import {MatTableModule} from '@angular/material/table'
 
 @NgModule({
   declarations: [
@@ -18,9 +21,13 @@ import { DetailsComponent } from './components/band-list/details/details.compone
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatIconModule,
+    MatDialogModule,
+    MatTableModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DetailsComponent]
 })
 export class AppModule { }
