@@ -44,7 +44,8 @@
         *matCellDef="let element"
         (click)="openDetailsDialog(element)"
       >
-        {{ element.active }}
+      <span *ngIf="element.active" style="color:green;">YES</span>
+      <span *ngIf="!element.active" style="color:red;">NO</span>
       </td>
     </ng-container>
 

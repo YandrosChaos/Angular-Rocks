@@ -1,8 +1,7 @@
 export class Band {
-    name?: string;
-    formedIn: number = 1970;
-    released?: string[];
-    active: boolean = false;
-    videoLink?: string;
-    imgLink? : string;
+  name?: string;
+  formedIn: number = 1970;
+  active: boolean = false;
+  videoLink?: string;
+  imgLink?: string;
 }
