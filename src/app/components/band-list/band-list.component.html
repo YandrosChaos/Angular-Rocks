@@ -1,1 +1,28 @@
-<p>band-list works!</p>
+<!-- WEB -->
+<div class="container web-catalog">
+    <div class="row mt-3">
+      <div class="col-md-4" *ngFor="let band of bandsData">
+        <div class="card mb-4 card-hover-efect">
+          <div class="card bg-dark border-dark text-white">
+            <img src="{{band.imgLink}}" width="100%" height="auto" focusable="false">
+            <div class="card-img-overlay">
+              <h5 class="card-title">{{band.name}}</h5>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a target="_blank" rel="external nofollow" href="{{band.videoLink}}">
+                  <button type="button" class="btn btn-sm btn-outline-danger mr-1">Play</button>
+                </a>
+                <a target="_blank" rel="external nofollow">
+                  <button type="button" class="btn btn-sm btn-outline-success mr-1">Details</button>
+                </a>
+              </div>
+              <small class="text-muted">{{band.formedIn}}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

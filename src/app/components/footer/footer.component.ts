@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  public linkedin : string = "https://www.linkedin.com/in/victor-develops/";
+  public github : string = "https://github.com/YandrosChaos";
+  public udemy : string = "https://www.udemy.com/user/elcadenas28/";
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  openContactDialog() : void{
   }
 
 }
