@@ -19,7 +19,11 @@ export class DetailsComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
       console.log(params.get('band'))
-      this.detailBand = this.bandService.getBandByName(params.get('band') || "")
+      this.bandService.getBandByName(params.get('band') || "").subscribe(
+        response => {
+          this.detailBand = response;
+        }
+      )
     });
   }
 }

@@ -10,7 +10,9 @@ import { Band } from '../../../models/band';
 export class AddComponent implements OnInit {
   band: Band = new Band();
 
-  constructor(private dialogRef: MatDialogRef<AddComponent>) {}
+  constructor(
+    private dialogRef: MatDialogRef<AddComponent>
+  ) {}
 
   ngOnInit(): void {}
 

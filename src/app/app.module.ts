@@ -16,6 +16,12 @@ import { AddComponent } from './components/band-list/add/add.component';
 import { FormsModule }   from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
+//Angular
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { environment } from '../environments/environment';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: BandListComponent },
@@ -40,10 +46,12 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule
   ],
   exports:[RouterModule],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent],
   entryComponents: [DetailsComponent, AddComponent]
 })
