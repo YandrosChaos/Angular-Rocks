@@ -52,8 +52,8 @@
     <!-- Remove Column -->
     <ng-container matColumnDef="remove">
       <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let element" (click)="removeAt(element)">
-        <mat-icon class="close-icon m-3" color="warn">delete</mat-icon>
+      <mat-cell *matCellDef="let element">
+        <mat-icon class="close-icon m-3" color="warn" (click)="removeAt(element)">delete</mat-icon>
       </mat-cell>
     </ng-container>
 
