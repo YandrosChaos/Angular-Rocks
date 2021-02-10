@@ -20,7 +20,7 @@
         *matCellDef="let element"
         (click)="openDetailsDialog(element)"
       >
-        {{ element.name }}
+        {{ element?.name }}
       </td>
     </ng-container>
 
@@ -32,7 +32,7 @@
         *matCellDef="let element"
         (click)="openDetailsDialog(element)"
       >
-        {{ element.formedIn }}
+        {{ element?.formedIn }}
       </td>
     </ng-container>
 

@@ -1,12 +1,8 @@
-<button
-  mat-icon-button
-  class="close-button float-right"
-  (click)="onClose()"
->
+<button mat-icon-button class="close-button float-right" (click)="onClose()">
   <mat-icon class="close-icon" color="warn">close</mat-icon>
 </button>
 <div class="mt-5">
-  <h1 class="mat-dialog-title text-center text-dark"> Add </h1>
+  <h1 class="mat-dialog-title text-center text-dark">Add your new band!</h1>
 
   <mat-dialog-content>
     <form #addForm="ngForm" class="text-center m-2">
@@ -46,7 +42,10 @@
           #formedInInput="ngModel"
         />
         <div
-          *ngIf="formedInInput.invalid && (formedInInput.dirty || formedInInput.touched)"
+          *ngIf="
+            formedInInput.invalid &&
+            (formedInInput.dirty || formedInInput.touched)
+          "
           class="alert alert-danger small p-0 m-1"
         >
           <div *ngIf="formedInInput.errors?.required">Required.</div>
@@ -58,6 +57,7 @@
 
       <!-- Active -->
       <div class="field m-2">
+        <label>Active</label>
         <input
           type="checkbox"
           name="active"
@@ -67,10 +67,30 @@
           #activeInput="ngModel"
         />
         <div
-          *ngIf="activeInput.invalid && (activeInput.dirty || activeInput.touched)"
+          *ngIf="
+            activeInput.invalid && (activeInput.dirty || activeInput.touched)
+          "
           class="alert alert-danger small p-0 m-1"
-        >
-        </div>
+        ></div>
+      </div>
+
+      <!-- description -->
+      <div class="field m-2">
+        <textarea
+          type="textarea"
+          name="description"
+          class="form-control bg-dark text-white text-center"
+          placeholder="Description"
+          [(ngModel)]="band.description"
+          #descriptionInput="ngModel"
+        ></textarea>
+        <div
+          *ngIf="
+            descriptionInput.invalid &&
+            (descriptionInput.dirty || descriptionInput.touched)
+          "
+          class="alert alert-danger small p-0 m-1"
+        ></div>
       </div>
 
       <!-- videoLink -->
