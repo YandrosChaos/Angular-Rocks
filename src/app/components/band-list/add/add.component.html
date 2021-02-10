@@ -1,0 +1,136 @@
+<button
+  mat-icon-button
+  class="close-button float-right"
+  [mat-dialog-close]="true"
+>
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+<div class="mt-5">
+  <h1 class="mat-dialog-title text-center text-dark"> Add </h1>
+
+  <mat-dialog-content>
+    <form #addForm="ngForm" class="text-center m-2">
+      <!-- name -->
+      <div class="field m-2">
+        <input
+          type="text"
+          name="name"
+          class="form-control bg-dark text-white text-center"
+          placeholder="Name"
+          [(ngModel)]="band.name"
+          required
+          minlength="3"
+          #nameInput="ngModel"
+        />
+
+        <div
+          *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)"
+          class="alert alert-danger small p-0 m-1"
+        >
+          <div *ngIf="nameInput.errors?.required">Name is required.</div>
+          <div *ngIf="nameInput.errors?.minlength">
+            Name must be at least 3 characters long.
+          </div>
+        </div>
+      </div>
+
+      <!-- formed -->
+      <div class="field m-2">
+        <input
+          type="number"
+          name="formedIn"
+          class="form-control bg-dark text-white text-center"
+          placeholder="Formed In"
+          [(ngModel)]="band.formedIn"
+          required
+          #formedInInput="ngModel"
+        />
+        <div
+          *ngIf="formedInInput.invalid && (formedInInput.dirty || formedInInput.touched)"
+          class="alert alert-danger small p-0 m-1"
+        >
+          <div *ngIf="formedInInput.errors?.required">Required.</div>
+          <div *ngIf="formedInInput.errors?.number">
+            This is not a correct format.
+          </div>
+        </div>
+      </div>
+
+      <!-- Active -->
+      <div class="field m-2">
+        <input
+          type="checkbox"
+          name="active"
+          class="form-control bg-dark text-white text-center"
+          placeholder="Active"
+          [(ngModel)]="band.active"
+          #activeInput="ngModel"
+        />
+        <div
+          *ngIf="activeInput.invalid && (activeInput.dirty || activeInput.touched)"
+          class="alert alert-danger small p-0 m-1"
+        >
+        </div>
+      </div>
+
+      <!-- videoLink -->
+      <div class="field m-2">
+        <input
+          type="text"
+          name="videoLink"
+          class="form-control bg-dark text-white text-center"
+          placeholder="Video Link"
+          [(ngModel)]="band.videoLink"
+          required
+          minlength="3"
+          #videoLinkInput="ngModel"
+        />
+
+        <div
+          *ngIf="videoLinkInput.invalid && (videoLinkInput.dirty || videoLinkInput.touched)"
+          class="alert alert-danger small p-0 m-1"
+        >
+          <div *ngIf="videoLinkInput.errors?.required">Video Link is required.</div>
+          <div *ngIf="videoLinkInput.errors?.minlength">
+            Name must be at least 3 characters long.
+          </div>
+        </div>
+      </div>
+
+      <!-- imgLink -->
+      <div class="field m-2">
+        <input
+          type="text"
+          name="imgLink"
+          class="form-control bg-dark text-white text-center"
+          placeholder="Image Link"
+          [(ngModel)]="band.imgLink"
+          required
+          minlength="3"
+          #imgLinkInput="ngModel"
+        />
+
+        <div
+          *ngIf="imgLinkInput.invalid && (imgLinkInput.dirty || imgLinkInput.touched)"
+          class="alert alert-danger small p-0 m-1"
+        >
+          <div *ngIf="imgLinkInput.errors?.required">Image Link is required.</div>
+          <div *ngIf="imgLinkInput.errors?.minlength">
+            Name must be at least 3 characters long.
+          </div>
+        </div>
+      </div>
+
+
+      <button
+        [mat-dialog-close]="true"
+        role="button"
+        class="btn btn-warning text-center"
+        (click)="onSave()"
+        [disabled]="!addForm.form.valid"
+      >
+        Send
+      </button>
+    </form>
+  </mat-dialog-content>
+</div>
