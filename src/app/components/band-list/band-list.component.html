@@ -1,10 +1,10 @@
 <div class="m-4">
-  <button
-    type="button"
-    class="btn btn-sm btn-success m-1"
-    (click)="onAdd()"
-  >
-    Add One
+  <button type="button" class="btn btn-sm btn-success m-1" (click)="onAdd()">
+    Add More!
+  </button>
+
+  <button type="button" class="btn btn-sm btn-info m-1" (click)="onReset()">
+    Add Default Data
   </button>
 
   <mat-form-field>
@@ -24,7 +24,7 @@
       </td>
     </ng-container>
 
-    <!-- Weight Column -->
+    <!-- Year Column -->
     <ng-container matColumnDef="year">
       <th mat-header-cell *matHeaderCellDef>Year</th>
       <td
@@ -36,7 +36,7 @@
       </td>
     </ng-container>
 
-    <!-- Symbol Column -->
+    <!-- Active Column -->
     <ng-container matColumnDef="active">
       <th mat-header-cell *matHeaderCellDef>Active</th>
       <td
@@ -44,23 +44,16 @@
         *matCellDef="let element"
         (click)="openDetailsDialog(element)"
       >
-      <span *ngIf="element.active" style="color:green;">YES</span>
-      <span *ngIf="!element.active" style="color:red;">NO</span>
+        <span *ngIf="element.active" style="color: green">YES</span>
+        <span *ngIf="!element.active" style="color: red">NO</span>
       </td>
     </ng-container>
 
     <!-- Remove Column -->
     <ng-container matColumnDef="remove">
-      <mat-header-cell *matHeaderCellDef> </mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <button
-          mat-icon-button
-          class="close-button m-1"
-          [mat-dialog-close]="true"
-          (click)="removeAt(element)"
-        >
-          <mat-icon class="close-icon" color="warn">delete</mat-icon>
-        </button>
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let element" (click)="removeAt(element)">
+        <mat-icon class="close-icon m-3" color="warn">delete</mat-icon>
       </mat-cell>
     </ng-container>
 

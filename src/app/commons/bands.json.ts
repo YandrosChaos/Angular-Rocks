@@ -18,7 +18,7 @@ export const BANDS: Band[]  = [
       description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eleifend sapien eros, volutpat imperdiet neque fringilla sit amet. Morbi vel risus eu diam posuere molestie eget in felis. Curabitur rhoncus aliquet ultricies. Aenean aliquet quis magna non congue. Duis ut nisi nibh. Fusce efficitur vitae mi eget vestibulum. Suspendisse eu neque ullamcorper, fermentum turpis sed, iaculis massa. Donec ut aliquet felis. Ut dignissim, lorem eu elementum finibus, lacus magna semper enim, in aliquet dolor odio sit amet augue."
     },
     {
-      name: 'AC/DC',
+      name: "AC\\DC",
       formedIn: 1973,
       active: false,
       videoLink: "https://www.youtube.com/watch?v=v2AC41dglnM",

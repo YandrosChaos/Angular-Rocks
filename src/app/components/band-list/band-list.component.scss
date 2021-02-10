@@ -1,5 +1,6 @@
 table {
   width: 100%;
+  border-collapse:collapse!important;
 }
 
 .mat-form-field {
@@ -7,13 +8,26 @@ table {
   width: 100%;
 }
 
-.mat-row:nth-child(even) {
+.mat-row, .mat-cell, .mat-header-cell{
+  border: none;
+}
+
+.mat-row:nth-child(odd) {
   background: rgba($color: #9b9c9b60, $alpha: 0.1);
 }
 
 .mat-row:hover{
   background: rgba($color: #0fd60f, $alpha: 0.2);
   cursor: pointer;
+}
+
+.mat-cell .mat-icon{
+  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12), 0.3s,
+  0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+}
+
+.mat-cell .mat-icon:hover{
+  transform: scale(1.5);
 }
 
 .close-button{

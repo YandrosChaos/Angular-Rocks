@@ -50,6 +50,10 @@ export class BandService {
       .delete();
   }
 
+  createOrAddDefaultData():void{
+    BANDS.forEach((band) => this.createBand(band));
+  }
+
   private renderBandFromCollection(item: any): Band {
     return item.payload.doc.data() as Band;
   }

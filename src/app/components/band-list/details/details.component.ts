@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Band } from '../../../models/band';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { BandService } from '../../../services/band.service';
 
 @Component({
@@ -14,16 +14,15 @@ export class DetailsComponent implements OnInit {
   constructor(
     private bandService: BandService,
     private route: ActivatedRoute
-    ) {}
+  ) {}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      console.log(params.get('band'))
-      this.bandService.getBandByName(params.get('band') || "").subscribe(
-        response => {
+      this.bandService
+        .getBandByName(params.get('band') || '')
+        .subscribe((response) => {
           this.detailBand = response;
-        }
-      )
+        });
     });
   }
 }
