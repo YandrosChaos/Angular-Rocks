@@ -4,7 +4,12 @@ import { BANDS } from '../commons/bands.json';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { renderBandFromCollection, renderBandFromDocument, noSpacesBandName, bandToJson } from '../commons/utils';
+import {
+  renderBandFromCollection,
+  renderBandFromDocument,
+  noSpacesBandName,
+  bandToJson,
+} from '../commons/utils';
 
 @Injectable({
   providedIn: 'root',
@@ -51,7 +56,14 @@ export class BandService {
       .delete();
   }
 
-  createOrAddDefaultData():void{
+  createOrAddDefaultData(): void {
+    this.deleteAllBand();
     BANDS.forEach((band) => this.createBand(band));
+  }
+
+  private deleteAllBand(): void {
+    this.getAllBand().subscribe((response) =>
+      response.forEach((band) => this.deleteBand(band))
+    );
   }
 }
