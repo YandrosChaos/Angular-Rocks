@@ -33,12 +33,15 @@ export class BandListComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.bandsData = this.allBandsData.filter((band) =>
-      band.name.trim().toLocaleLowerCase().includes(filterValue.trim().toLocaleLowerCase())
+      band.name
+        .trim()
+        .toLocaleLowerCase()
+        .includes(filterValue.trim().toLocaleLowerCase())
     );
     //this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  openDetailsDialog(band: Band): void {
+  navigateToDetails(band: Band): void {
     this.router.navigate([`/details`, noSpacesBandName(band)]);
   }
 
@@ -59,7 +62,7 @@ export class BandListComponent implements OnInit {
     successSwal();
   }
 
-  removeAt(row: any): void {
+  removeAt(band: Band): void {
     Swal.fire({
       icon: 'warning',
       text: 'Are you sure?',
@@ -74,7 +77,7 @@ export class BandListComponent implements OnInit {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        this.bandService.deleteBand(row);
+        this.bandService.deleteBand(band);
       }
     });
   }
