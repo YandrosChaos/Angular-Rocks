@@ -58,7 +58,7 @@ export class BandListComponent implements OnInit {
   }
 
   onReset(): void {
-    this.bandService.createOrAddDefaultData();
+    this.bandService.resetData();
     successSwal();
   }
 

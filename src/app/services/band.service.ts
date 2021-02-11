@@ -4,7 +4,14 @@ import { BANDS } from '../commons/bands.json';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { renderBandFromCollection, renderBandFromDocument, noSpacesBandName, bandToJson } from '../commons/utils';
+import {
+  renderBandFromCollection,
+  renderBandFromDocument,
+  noSpacesBandName,
+  bandToJson,
+} from '../commons/utils';
+
+const collection_name: string = 'bands';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +21,7 @@ export class BandService {
 
   getAllBand(): Observable<Band[]> {
     return this.firestore
-      .collection<Band[]>('bands')
+      .collection<Band[]>(collection_name)
       .snapshotChanges()
       .pipe(
         map((response) => {
@@ -27,7 +34,7 @@ export class BandService {
 
   getBandByName(documentId: string): Observable<Band> {
     return this.firestore
-      .collection<Band>('bands')
+      .collection<Band>(collection_name)
       .doc(documentId)
       .snapshotChanges()
       .pipe(
@@ -39,19 +46,19 @@ export class BandService {
 
   createBand(band: Band): void {
     this.firestore
-      .collection('bands')
+      .collection(collection_name)
       .doc(noSpacesBandName(band))
       .set(bandToJson(band));
   }
 
   deleteBand(band: Band): void {
     this.firestore
-      .collection<Band>('bands')
+      .collection<Band>(collection_name)
       .doc(noSpacesBandName(band))
       .delete();
   }
 
-  createOrAddDefaultData():void{
+  resetData(): void {
     BANDS.forEach((band) => this.createBand(band));
   }
 }
