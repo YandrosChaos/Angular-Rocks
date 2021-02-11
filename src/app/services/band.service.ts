@@ -56,7 +56,7 @@ export class BandService {
       .delete();
   }
 
-  createOrAddDefaultData(): void {
+  restoreData(): void {
     this.deleteAllBand();
     BANDS.forEach((band) => this.createBand(band));
   }
