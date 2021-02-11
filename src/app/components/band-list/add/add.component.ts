@@ -23,7 +23,7 @@ export class AddComponent implements OnInit {
 
     if (!this.band.imgLink) {
       this.band.imgLink =
-        'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flibrary.ucf.edu%2Fwp-content%2Fuploads%2Fsites%2F5%2F2015%2F08%2Fphoto-not-available.jpg&f=1&nofb=1';
+        'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F3.bp.blogspot.com%2F-XB85UD145qE%2FV5buf22iv2I%2FAAAAAAAAA1I%2F8LBmpwNX-rU7ZjzrHOS2b0F_Pj0xqpHIQCLcB%2Fs1600%2Fnia.png&f=1&nofb=1';
     }
 
     if (!this.band.description) {
