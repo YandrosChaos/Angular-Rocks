@@ -14,12 +14,20 @@
       <small class="text-muted">Formed in: {{ detailBand?.formedIn }}</small>
     </div>
 
+    <hr>
+
     <img
       src="{{ detailBand?.imgLink }}"
       focusable="false"
     />
 
-    <p class="mt-5">
+    <hr>
+
+    <p>Status: 
+      <span *ngIf="detailBand.active" style="color:green;"> Active</span>
+      <span *ngIf="!detailBand.active" style="color:red;"> Inactive</span>
+    </p>
+    <p class="ml-4 mr-4">
       {{ detailBand?.description }}
     </p>
   </div>
