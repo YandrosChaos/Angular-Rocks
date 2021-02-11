@@ -5,7 +5,7 @@
   <h1 class="mat-dialog-title text-center text-dark">Add your new band!</h1>
 
   <mat-dialog-content>
-    <form #addForm="ngForm" class="text-center m-2">
+    <form [formGroup]="form" class="text-center m-2">
       <!-- name -->
       <div class="field m-2">
         <input
@@ -16,15 +16,15 @@
           [(ngModel)]="band.name"
           required
           minlength="3"
-          #nameInput="ngModel"
+          formControlName="name"
         />
 
         <div
-          *ngIf="nameInput.invalid && (nameInput.dirty || nameInput.touched)"
-          class="alert alert-danger small p-0 m-1"
+        *ngIf="isValidInput('name')"
+        class="alert alert-danger small p-0 m-1"
         >
-          <div *ngIf="nameInput.errors?.required">Name is required.</div>
-          <div *ngIf="nameInput.errors?.minlength">
+          <div *ngIf="form.controls['name'].errors?.required">Name is required.</div>
+          <div *ngIf="form.controls['name'].errors?.minlength">
             Name must be at least 3 characters long.
           </div>
         </div>
@@ -40,19 +40,13 @@
           placeholder="Formed In"
           [(ngModel)]="band.formedIn"
           required
-          #formedInInput="ngModel"
+          formControlName="formedIn"
         />
         <div
-          *ngIf="
-            formedInInput.invalid &&
-            (formedInInput.dirty || formedInInput.touched)
-          "
+          *ngIf="isValidInput('formedIn')"
           class="alert alert-danger small p-0 m-1"
         >
-          <div *ngIf="formedInInput.errors?.required">Required.</div>
-          <div *ngIf="formedInInput.errors?.number">
-            This is not a correct format.
-          </div>
+            Bad format. Number must be between 1000 and 2999!
         </div>
       </div>
 
@@ -65,7 +59,7 @@
           class="form-control"
           placeholder="Active"
           [(ngModel)]="band.active"
-          #activeInput="ngModel"
+          formControlName="isActive"
         />
       </div>
 
@@ -77,15 +71,8 @@
           class="form-control text-center"
           placeholder="Description"
           [(ngModel)]="band.description"
-          #descriptionInput="ngModel"
+          formControlName="description"
         ></textarea>
-        <div
-          *ngIf="
-            descriptionInput.invalid &&
-            (descriptionInput.dirty || descriptionInput.touched)
-          "
-          class="alert alert-danger small p-0 m-1"
-        ></div>
       </div>
 
       <!-- videoLink -->
@@ -94,23 +81,35 @@
           type="text"
           name="videoLink"
           class="form-control text-center"
-          placeholder="Add Video Link"
+          placeholder="Video Link"
           [(ngModel)]="band.videoLink"
-          #videoLinkInput="ngModel"
+          formControlName="videoLink"
         />
+        <div
+          *ngIf="isValidInput('videoLink')"
+          class="alert alert-danger small p-0 m-1"
+        >
+        This is not an url!
+        </div>
       </div>
 
       <!-- imgLink -->
       <div class="field m-2">
         <input
-          type="text"
+          type="url"
           name="imgLink"
           class="form-control text-center"
           placeholder="Image Link"
           [(ngModel)]="band.imgLink"
           minlength="3"
-          #imgLinkInput="ngModel"
+          formControlName="imageLink"
         />
+        <div
+          *ngIf="isValidInput('imageLink')"
+          class="alert alert-danger small p-0 m-1"
+        >
+          This is not an url!
+        </div>
       </div>
 
       <button
@@ -118,9 +117,9 @@
         role="button"
         class="btn btn-warning text-center"
         (click)="onSave()"
-        [disabled]="!addForm.form.valid"
+        [disabled]="!form.valid"
       >
-        Send
+        Add
       </button>
     </form>
   </mat-dialog-content>

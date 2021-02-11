@@ -13,7 +13,7 @@ import {MatTableModule} from '@angular/material/table'
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AddComponent } from './components/band-list/add/add.component';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 //Angular
@@ -46,6 +46,7 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routes),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule
