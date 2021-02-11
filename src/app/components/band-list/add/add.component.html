@@ -11,8 +11,8 @@
         <input
           type="text"
           name="name"
-          class="form-control bg-dark text-white text-center"
-          placeholder="Name"
+          class="form-control text-center"
+          placeholder="*Band Name"
           [(ngModel)]="band.name"
           required
           minlength="3"
@@ -32,10 +32,11 @@
 
       <!-- formed -->
       <div class="field m-2">
+        <mat-label>*Formed In</mat-label>
         <input
           type="number"
           name="formedIn"
-          class="form-control bg-dark text-white text-center"
+          class="form-control text-center"
           placeholder="Formed In"
           [(ngModel)]="band.formedIn"
           required
@@ -57,21 +58,15 @@
 
       <!-- Active -->
       <div class="field m-2">
-        <label>Active</label>
+        <mat-label>Active now?</mat-label>
         <input
           type="checkbox"
           name="active"
-          class="form-control bg-dark text-white text-center"
+          class="form-control"
           placeholder="Active"
           [(ngModel)]="band.active"
           #activeInput="ngModel"
         />
-        <div
-          *ngIf="
-            activeInput.invalid && (activeInput.dirty || activeInput.touched)
-          "
-          class="alert alert-danger small p-0 m-1"
-        ></div>
       </div>
 
       <!-- description -->
@@ -79,7 +74,7 @@
         <textarea
           type="textarea"
           name="description"
-          class="form-control bg-dark text-white text-center"
+          class="form-control text-center"
           placeholder="Description"
           [(ngModel)]="band.description"
           #descriptionInput="ngModel"
@@ -98,8 +93,8 @@
         <input
           type="text"
           name="videoLink"
-          class="form-control bg-dark text-white text-center"
-          placeholder="Video Link"
+          class="form-control text-center"
+          placeholder="Add Video Link"
           [(ngModel)]="band.videoLink"
           #videoLinkInput="ngModel"
         />
@@ -110,7 +105,7 @@
         <input
           type="text"
           name="imgLink"
-          class="form-control bg-dark text-white text-center"
+          class="form-control text-center"
           placeholder="Image Link"
           [(ngModel)]="band.imgLink"
           minlength="3"

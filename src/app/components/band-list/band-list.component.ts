@@ -17,6 +17,7 @@ export class BandListComponent implements OnInit {
   bandsData: Array<Band> = [];
   displayedColumns: string[] = ['name', 'year', 'active', 'remove'];
   dataSource = new MatTableDataSource(this.bandsData);
+
   constructor(
     private bandService: BandService,
     private dialog: MatDialog,
@@ -69,7 +70,7 @@ export class BandListComponent implements OnInit {
         popup: 'animate__animated animate__rotateInUpRight',
       },
       hideClass: {
-        popup: 'animate__animated animate__hinge',
+        popup: 'animate__animated animate__rotateOutDownRight',
       },
     }).then((result) => {
       if (result.isConfirmed) {
