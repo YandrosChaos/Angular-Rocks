@@ -15,8 +15,7 @@ import { noSpacesBandName, successSwal } from 'src/app/commons/utils';
 })
 export class BandListComponent implements OnInit {
   bandsData: Array<Band> = [];
-  displayedColumns: string[] = ['name', 'year', 'active', 'remove'];
-  dataSource = new MatTableDataSource(this.bandsData);
+  allBandsData: Array<Band> = [];
 
   constructor(
     private bandService: BandService,
@@ -27,13 +26,16 @@ export class BandListComponent implements OnInit {
   ngOnInit(): void {
     this.bandService.getAllBand().subscribe((response) => {
       this.bandsData = response;
-      this.dataSource = new MatTableDataSource(response);
+      this.allBandsData = response;
     });
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.bandsData = this.allBandsData.filter((band) =>
+      band.name.trim().toLocaleLowerCase().includes(filterValue.trim().toLocaleLowerCase())
+    );
+    //this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   openDetailsDialog(band: Band): void {
@@ -45,12 +47,10 @@ export class BandListComponent implements OnInit {
     dialogConfig.autoFocus = false;
     const dialogRef = this.dialog.open(AddComponent, dialogConfig);
     dialogRef.afterClosed().subscribe((data) => {
-
-      if(data){
+      if (data) {
         this.bandService.createBand(data);
         successSwal();
       }
-
     });
   }
 
