@@ -2,7 +2,9 @@
   <mat-icon class="close-icon" color="warn">close</mat-icon>
 </button>
 <div class="mt-5">
-  <h1 class="mat-dialog-title text-center text-dark">Add your new band!</h1>
+  <h1 class="mat-dialog-title text-center text-dark">NEW BAND</h1>
+
+  <hr>
 
   <mat-dialog-content>
     <form [formGroup]="form" class="text-center m-2">
@@ -20,10 +22,12 @@
         />
 
         <div
-        *ngIf="isValidInput('name')"
-        class="alert alert-danger small p-0 m-1"
+          *ngIf="isValidInput('name')"
+          class="alert alert-danger small p-0 m-1"
         >
-          <div *ngIf="form.controls['name'].errors?.required">Name is required.</div>
+          <div *ngIf="form.controls['name'].errors?.required">
+            Name is required.
+          </div>
           <div *ngIf="form.controls['name'].errors?.minlength">
             Name must be at least 3 characters long.
           </div>
@@ -46,7 +50,7 @@
           *ngIf="isValidInput('formedIn')"
           class="alert alert-danger small p-0 m-1"
         >
-            Bad format. Number must be between 1000 and 2999!
+          Bad format. Number must be between 1000 and 2999!
         </div>
       </div>
 
@@ -64,7 +68,7 @@
       </div>
 
       <!-- description -->
-      <div class="field m-2">
+      <div class="field m-2 mt-4">
         <textarea
           type="textarea"
           name="description"
@@ -77,11 +81,12 @@
 
       <!-- videoLink -->
       <div class="field m-2">
+        <mat-label>ImageLink (optional)</mat-label>
         <input
           type="text"
           name="videoLink"
           class="form-control text-center"
-          placeholder="Video Link"
+          placeholder="Video of the band"
           [(ngModel)]="band.videoLink"
           formControlName="videoLink"
         />
@@ -89,17 +94,18 @@
           *ngIf="isValidInput('videoLink')"
           class="alert alert-danger small p-0 m-1"
         >
-        This is not an url!
+          Bad format!
         </div>
       </div>
 
       <!-- imgLink -->
       <div class="field m-2">
+        <mat-label>VideoLink (optional)</mat-label>
         <input
           type="url"
           name="imgLink"
           class="form-control text-center"
-          placeholder="Image Link"
+          placeholder="Picture of the band"
           [(ngModel)]="band.imgLink"
           minlength="3"
           formControlName="imageLink"
@@ -108,9 +114,11 @@
           *ngIf="isValidInput('imageLink')"
           class="alert alert-danger small p-0 m-1"
         >
-          This is not an url!
+          Bad format!
         </div>
       </div>
+
+      <hr>
 
       <button
         [mat-dialog-close]="true"
