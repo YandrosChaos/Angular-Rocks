@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Band } from '../../../models/band';
 
@@ -8,11 +9,35 @@ import { Band } from '../../../models/band';
   styleUrls: ['./add.component.scss'],
 })
 export class AddComponent implements OnInit {
+  public form: FormGroup;
   band: Band = new Band();
 
   constructor(
-    private dialogRef: MatDialogRef<AddComponent>
-  ) {}
+    private dialogRef: MatDialogRef<AddComponent>,
+    private fb: FormBuilder
+  ) {
+    this.form = this.fb.group({
+      name: ['', Validators.required],
+      formedIn: [
+        1970,
+        [Validators.required, Validators.pattern('[1|2]{1}[8|9]{1}[0-9]{2}')],
+      ],
+      isActive: [false.valueOf, [Validators.required]],
+      description: [''],
+      videoLink: [
+        '',
+        Validators.pattern(
+          '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'
+        ),
+      ],
+      imageLink: [
+        '',
+        Validators.pattern(
+          '(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?'
+        ),
+      ],
+    });
+  }
 
   ngOnInit(): void {}
 
@@ -35,5 +60,13 @@ export class AddComponent implements OnInit {
 
   onClose() {
     this.dialogRef.close();
+  }
+
+  isValidInput(fieldName: string): boolean {
+    return (
+      this.form.controls[fieldName].invalid &&
+      (this.form.controls[fieldName].dirty ||
+        this.form.controls[fieldName].touched)
+    );
   }
 }
