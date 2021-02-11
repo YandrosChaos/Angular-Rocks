@@ -1,38 +1,24 @@
-table {
-  width: 100%;
-}
-
 .mat-form-field {
   font-size: 20px;
   width: 100%;
 }
 
-.mat-row, .mat-cell, .mat-header-cell{
-  border: none;
+a.button {
+  text-decoration: none;
+  color: white;
 }
 
-.mat-row {
-  height: auto;
-}
+@media screen and (min-width: 600px) {
+  .card-hover-efect {
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08), 0 0 6px rgba(0, 0, 0, 0.05);
+    transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12),
+      0.3s box-shadow,
+      0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
+  }
 
-.mat-cell {
-  padding: 10px 10px 10px 0;
-}
-
-.mat-row:nth-child(odd) {
-  background: rgba($color: #9b9c9b60, $alpha: 0.1);
-}
-
-.mat-row:hover{
-  background: rgba($color: #0fd60f, $alpha: 0.2);
-  cursor: pointer;
-}
-
-.mat-cell .mat-icon{
-  transition: 0.3s transform cubic-bezier(0.155, 1.105, 0.295, 1.12), 0.3s,
-  0.3s -webkit-transform cubic-bezier(0.155, 1.105, 0.295, 1.12);
-}
-
-.mat-cell .mat-icon:hover{
-  transform: scale(2.0);
+  .card-hover-efect:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(255, 7, 58, 0.15),
+      0 4px 8px rgba(128, 29, 25, 0.36);
+  }
 }
